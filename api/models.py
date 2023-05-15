@@ -7,18 +7,25 @@ class Category(models.Model):
     name = models.CharField(max_length=100)
     status = models.CharField(max_length=100, choices=(("Active", "Active"), ("Inactive", "Inactive")), default="Active")
 
+    def __str__(self) -> str:
+        return self.name
+
 
 class Movie(models.Model):
     name = models.CharField(max_length=100)
     category = models.ManyToManyField(Category)
     release_date = models.DateField(auto_now_add=True)
 
+    def __str__(self) -> str:
+        return self.name
 
 class Theater(models.Model):
     name = models.CharField(max_length=100)
     no_of_seats = models.IntegerField()
     location = models.CharField(max_length=100)
 
+    def __str__(self) -> str:
+        return self.name
 
 class TimeSlot(models.Model):
     start_time = models.TimeField()
