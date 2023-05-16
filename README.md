@@ -1,4 +1,4 @@
-# ticketbook
+# TicketBook
 
 # Documentation link
 https://docs.google.com/document/d/1PbtVNpVpjxpdeKb7hRpb9LA3hWkfrDAHwzb57sRz3A4/edit?usp=sharing
@@ -7,5 +7,5 @@ https://docs.google.com/document/d/1PbtVNpVpjxpdeKb7hRpb9LA3hWkfrDAHwzb57sRz3A4/
 http://127.0.0.1:8000/admin/login/?next=/admin/
 
 # Credentials
-username: jayant
+username: jayant\n
 password: jayant
