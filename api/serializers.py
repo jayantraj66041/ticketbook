@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from api.models import Theater, Movie, Booking, Category, TimeSlot
+from api.models import Theater, Movie, Booking, Category, TimeSlot, Seats
+from django.contrib.auth.models import User
 
 
 # movie cateogry serializer
@@ -35,7 +36,32 @@ class MovieTheaterSerializer(serializers.ModelSerializer):
         fields = ['id', 'theater', 'start_time', 'end_time', 'date']    # data info of timeslot
 
 
+
+class MemberSerializer(serializers.ModelSerializer):
+    # booking = serializers.IntegerField()
+    class Meta:
+        model = Seats
+        fields = ['name', 'seat_no']
+
 class BookingSerializer(serializers.ModelSerializer):
+    members = MemberSerializer(many=True)
+    # time_slot = serializers.IntegerField()
+
+    def create(self, attr):
+        # print("pass5")
+        members = attr.get("members")
+        booking = Booking.objects.create(time_slot=attr.get("time_slot"))
+
+        # print(members[0]["seat_no"], "@@$$$$@@@$$")
+        # print(booking)
+        # print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+
+        for member in members:
+            Seats.objects.create(booking=booking, seat_no=member["seat_no"], name=member['name'])
+
+        return booking
+
     class Meta:
         model = Booking
-        fields = '__all__'
+        fields = ['time_slot', 'members']
+

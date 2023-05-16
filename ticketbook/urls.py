@@ -19,5 +19,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+
+    # default /api/ on first segment of url
     path("api/", include("api.urls")),
 ]
