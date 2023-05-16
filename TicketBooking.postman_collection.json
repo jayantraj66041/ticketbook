@@ -1,0 +1,201 @@
+{
+	"info": {
+		"_postman_id": "d7974acd-c048-4907-bafb-047941f025f7",
+		"name": "TicketBooking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19227801"
+	},
+	"item": [
+		{
+			"name": "http://127.0.0.1:8000/api/movies/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/movies/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"movies",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/api/movie/2/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/movie/4/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"movie",
+						"4",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/api/movie-theater/2/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/movie-theater/2/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"movie-theater",
+						"2",
+						""
+					]
+				},
+				"description": "This API shows all the theater list where the movie where plays"
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/api/token/",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "jayant",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "jayant",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/token/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"token",
+						""
+					]
+				},
+				"description": "API for get the access token for booking validation.\r\nFor getting the access token we have to send payload of username and password with right credincials."
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/api/booking/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg0MjY2MTQ5LCJpYXQiOjE2ODQyNjQzNDksImp0aSI6IjI3MTBmNDc5NjU3MTRkOGM4ODUzYTcyMzM2MWUyMGY1IiwidXNlcl9pZCI6MX0.FLe2bfhVhrnd93hs313RJIDEq2ZfzEe-8MGULDnRAIY",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"time_slot\": 2,\r\n\t\"members\": [\r\n\t\t{\r\n\t\t\t\"name\": \"Jayant\",\r\n\t\t\t\"seat_no\": 2\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"name\": \"Akash\",\r\n\t\t\t\"seat_no\": 3\r\n\t\t}\r\n\t]\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/booking/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"booking",
+						""
+					]
+				},
+				"description": "Apply booking with the member details"
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/api/my-bookings/",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg0MjY2MTQ5LCJpYXQiOjE2ODQyNjQzNDksImp0aSI6IjI3MTBmNDc5NjU3MTRkOGM4ODUzYTcyMzM2MWUyMGY1IiwidXNlcl9pZCI6MX0.FLe2bfhVhrnd93hs313RJIDEq2ZfzEe-8MGULDnRAIY",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/my-bookings/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"my-bookings",
+						""
+					]
+				},
+				"description": "get all of my location whose account access key is added in header"
+			},
+			"response": []
+		}
+	]
+}

@@ -59,10 +59,6 @@ class Booking(models.Model):
     time_slot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE)
     total_amount = models.IntegerField(default=0)
 
-    # showing default name
-    def __str__(self) -> str:
-        return self.user + " - " + self.time_slot
-
 
 # seats table in database
 class Seats(models.Model):
@@ -73,4 +69,4 @@ class Seats(models.Model):
 
     # showing default name
     def __str__(self) -> str:
-        return self.seat_no + " - " + self.name
+        return str(self.seat_no) + " - " + self.name

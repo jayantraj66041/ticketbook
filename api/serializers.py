@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from api.models import Theater, Movie, Booking, Category, TimeSlot, Seats
-from django.contrib.auth.models import User
 
 
 # movie cateogry serializer
@@ -36,18 +35,20 @@ class MovieTheaterSerializer(serializers.ModelSerializer):
         fields = ['id', 'theater', 'start_time', 'end_time', 'date']    # data info of timeslot
 
 
-
+# member name and seat no serializer
 class MemberSerializer(serializers.ModelSerializer):
     # booking = serializers.IntegerField()
     class Meta:
         model = Seats
         fields = ['name', 'seat_no']
 
+
+# booking serializer
 class BookingSerializer(serializers.ModelSerializer):
     members = MemberSerializer(many=True)
     # time_slot = serializers.IntegerField()
 
-    def create(self, attr):
+    def create(self, attr):             # automatic create Seats for the given member on or many
         # print("pass5")
         members = attr.get("members")
         booking = Booking.objects.create(time_slot=attr.get("time_slot"))
@@ -56,7 +57,7 @@ class BookingSerializer(serializers.ModelSerializer):
         # print(booking)
         # print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 
-        for member in members:
+        for member in members:              # Seat creation according to the no of members
             Seats.objects.create(booking=booking, seat_no=member["seat_no"], name=member['name'])
 
         return booking
@@ -65,3 +66,20 @@ class BookingSerializer(serializers.ModelSerializer):
         model = Booking
         fields = ['time_slot', 'members']
 
+
+# timeslot of movie and theater serializer
+class TimeSlotSerializer(serializers.ModelSerializer):
+    movie = serializers.StringRelatedField()
+    theater = serializers.StringRelatedField()
+    class Meta:
+        model = TimeSlot
+        fields = ['date', 'start_time', 'end_time', 'movie', 'theater']
+
+
+# my all bookings serializer
+class MyBookingSerializer(serializers.ModelSerializer):
+    # name = serializers.CharField(source='user.name')
+    time_slot = TimeSlotSerializer()
+    class Meta:
+        model = Booking
+        fields = ['time_slot', 'total_amount']

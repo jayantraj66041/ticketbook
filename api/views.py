@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from api.models import Theater, Movie, Booking, TimeSlot
-from api.serializers import MovieSerializer, MovieTheaterSerializer, BookingSerializer
+from api.serializers import MovieSerializer, MovieTheaterSerializer, BookingSerializer, MyBookingSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 
@@ -57,3 +57,13 @@ class BookingView(APIView):
 
         # print('pass4')
         return Response({"status": "Booking Failed!!"},status=status.HTTP_400_BAD_REQUEST)
+
+
+class MyBookingView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request, *args, **kwargs):
+        mybookings = Booking.objects.filter(user=request.user)
+        serializer = MyBookingSerializer(mybookings, many=True)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
